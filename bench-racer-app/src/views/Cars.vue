@@ -1,28 +1,37 @@
 <template>
-    <section class="container">
-        <header />
-        <section>
+<section>
+    <div class="top-nav">
+        <top-nav />
+    </div>
+        <section class="container">
             <car-list 
             :cars="cars"
+            :removeCar="removeCar"
+            :getInCar="getInCar"
+            :updateCar="updateCar"
             />
+            
+            <mod-chart />
+            <new-car-form 
+            :addCar='addCar'/>
         </section>
-        <new-car-form 
-        :addCar='addCar'/>
     </section>
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
+import TopNav from '@/components/TopNav.vue'
 import CarList from '@/components/CarList.vue'
 import NewCarForm from '@/components/NewCarForm.vue'
+import ModChart from '@/components/ModChart.vue'
 // import API from '@/lib/API.js'
 
 export default {
 name: 'cars',
 components: {
-    Header,
+    TopNav,
     CarList,
-    NewCarForm
+    NewCarForm,
+    ModChart
   },
     data() {
         return {
@@ -35,23 +44,21 @@ components: {
     mounted() {
         const carAPI = 'https://bench-racer.herokuapp.com/cars'
         // const carAPI = 'http://localhost:3000/cars'
-        const powertrainAPI ='https://bench-racer.herokuapp.com/metrics/powertrain/sum'
-        const chassisAPI = 'https://bench-racer.herokuapp.com/metrics/chassis/sum'
-        const miscAPI = 'https://bench-racer.herokuapp.com/metrics/misc/sum'
         
-        return fetch(carAPI)
-            .then(res => res.json())
-            .then( (res) => {
-                console.log("FETCH FOR CARS", res);
-                this.cars = res.cars
-                // this.cars.push(res)
-                // this.cars = this.cars
-                console.log("CARS IN APP", this.cars);                      
-            })
+        
+    return fetch(carAPI)
+        .then(res => res.json())
+        .then( (res) => {
+            // console.log("FETCH FOR CARS", res);
+            this.cars = res.cars
+            // this.cars.push(res)
+            // this.cars = this.cars
+            console.log("CARS IN APP", this.cars);                      
+        })
     },
   methods: {
     addCar(car) {
-        console.log(this);
+        // console.log(this);
         const vue = this
         // why am i losing this in scope of fetch
         const data = JSON.stringify(car)
@@ -83,12 +90,21 @@ components: {
     removeCar(car) {
         const index = this.cars.indexOf(car)
         this.cars.splice(index, 1)
-    }  
+    },
+    updateCar(car){
+
+    },
+    getInCar(car) {
+
+    }
 }
 }
 </script>
 
 <style>
-
+    .top-nav{
+        
+        width: 100%
+    }
 
 </style>

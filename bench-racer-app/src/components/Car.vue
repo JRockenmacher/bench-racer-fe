@@ -5,7 +5,9 @@
             <h5 class="card-title">{{car.name}}</h5>
             <span class="card.text">{{car.year}} {{car.make}} {{car.model}}</span>
             <p class=card.text>Layout: {{car.drive_layout}}</p>
-            <button @click="removeCar()" class ="btn btn-danger">Remove Car</button>
+            <button type="button" @click="getInCar()" class="btn btn-success">Get In</button>
+            <button type="button" @click="updateCar()" class="btn btn-warning">Update Car</button>
+            <button type="button" @click="removeCar()" class ="btn btn-danger">Remove Car</button>
         </div>
     </section>
 </template>
@@ -13,12 +15,13 @@
 <script>
 export default {
     name: "car",
-    props: ['car', 'removeCar'],
+    props: ['car', 'removeCar', 'updateCar', 'getinCar'],
     data: () => ({
         
         }),
     
 }
+
 </script>
 
 <style scoped>
@@ -30,6 +33,10 @@ export default {
    
    .card {
       padding: 1em;
+   }
+
+   .btn {
+       width: 90%
    }
 </style>
 

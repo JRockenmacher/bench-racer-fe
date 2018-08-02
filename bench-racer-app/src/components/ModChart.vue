@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <pie 
+  <div class="chart-container">
+    <h5 class="chart-title">Mod Cost Breakdown:</h5>
+    <pie
       :options="options"
       :chart-data="chartData" 
       />
@@ -8,8 +9,9 @@
 </template>
 
 <script>
-import { Pie } from 'vue-chartsjs'
+import Pie from '@/../chart.js'
 export default {
+  name:"mod-chart",
   components: {
     Pie
   },
@@ -43,12 +45,13 @@ export default {
         {
           label: 'Data One',
           backgroundColor: ['red', 'green', 'grey'],
-          data: [8,4,1]
+          data: [36,63,1]
         }
         ],
       }
     }
   },
+  
   methods: {
 
   }
@@ -56,5 +59,23 @@ export default {
 </script>
 
 <style>
-
+  .chart-container {
+    background-color: rgba(0,0,0, 0.7);
+    padding: 1em;
+    max-height: 450px;
+    width: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #pie-chart{
+    max-height: 390px;
+    max-width: 390px;
+  }
+  .chart-title{
+    color: white;
+    text-align: center;
+  }
 </style>
