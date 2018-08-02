@@ -1,0 +1,24 @@
+{
+  "name": "bench-racer-fe",
+  "version": "1.0.0",
+  "description": "front end for bench racer app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JRockenmacher/bench-racer-fe.git"
+  },
+  "author": "JSR",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JRockenmacher/bench-racer-fe/issues"
+  },
+  "homepage": "https://github.com/JRockenmacher/bench-racer-fe#readme",
+  "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "chart.js": "^2.7.2",
+    "vue-charts": "^0.2.1"
+  }
+}
