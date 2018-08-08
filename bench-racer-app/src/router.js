@@ -14,9 +14,10 @@ export default new Router({
       component: Cars
     },
     {
-      path: '/mods',
+      path: '/mods/:id',
       name: 'mods',
-      component: Mods
+      component: Mods,
+      props: true
     }
   ]
 })

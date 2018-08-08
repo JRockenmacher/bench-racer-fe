@@ -6,7 +6,6 @@
         :key="mod.id"
         :removemod="removemod"
         :updatemod="updatemod"
-        :getInmod="getInmod"
         />
     </section>
 </template>
@@ -16,7 +15,7 @@ import Mod from '@/components/mod.vue'
 
 export default {
     name: 'mod-list',
-    props: ['mods', 'removemod', 'updatemod', 'getInmod'],
+    props: ['mods', 'removemod', 'updatemod'],
     components: {
         Mod
     },

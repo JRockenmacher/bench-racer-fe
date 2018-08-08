@@ -6,7 +6,6 @@
         :key="car.id"
         :removeCar="removeCar"
         :updateCar="updateCar"
-        :getInCar="getInCar"
         />
     </section>
 </template>
@@ -16,7 +15,7 @@ import Car from '@/components/Car.vue'
 
 export default {
     name: 'car-list',
-    props: ['cars', 'removeCar', 'updateCar', 'getInCar'],
+    props: ['cars', 'removeCar', 'updateCar'],
     components: {
         Car
     },

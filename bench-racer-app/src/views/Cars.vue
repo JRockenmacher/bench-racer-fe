@@ -6,14 +6,15 @@
         <section class="container">
             <car-list 
             :cars="cars"
-            :removeCar="removeCar"
-            :getInCar="getInCar"
-            :updateCar="updateCar"
-            />
             
+            />
+            <!-- :removeCar="removeCar"
+            :getInCar="getInCar"
+            :updateCar="updateCar" -->
             <mod-chart />
             <new-car-form 
-            :addCar='addCar'/>
+            />
+            <!-- :addCar='addCar' -->
         </section>
     </section>
 </template>
@@ -42,21 +43,34 @@ components: {
 //     this.movements = await API.getMovements()
 // },
     mounted() {
-        const carAPI = 'https://bench-racer.herokuapp.com/cars'
         // const carAPI = 'http://localhost:3000/cars'
         
-        
-    return fetch(carAPI)
+        this.getCars()
+        // this.getMods()
+                     
+     
+    
+    },
+methods: {
+    getCars() {
+        const carAPI = 'https://bench-racer.herokuapp.com/cars'
+        fetch(carAPI)
         .then(res => res.json())
         .then( (res) => {
-            // console.log("FETCH FOR CARS", res);
             this.cars = res.cars
-            // this.cars.push(res)
-            // this.cars = this.cars
-            console.log("CARS IN APP", this.cars);                      
-        })
+            console.log("CARS IN APP", this.cars)                   
+            })
     },
-  methods: {
+        getMods() {
+        const modAPI = 'https://bench-racer.herokuapp.com/mods' 
+            fetch(modAPI)
+            .then(res => res.json())
+            .then( (res) => {
+                // console.log("FETCH FOR CARS", res);
+                this.mods = res.mods
+                console.log("MODS IN APP", this.mods);                      
+            })
+        },
     addCar(car) {
         // console.log(this);
         const vue = this
@@ -87,23 +101,24 @@ components: {
     // addCar(car) {
     //     this.cars.push(car)
     // },
-    removeCar(car) {
-        const index = this.cars.indexOf(car)
-        this.cars.splice(index, 1)
-    },
-    updateCar(car){
+//     removeCar(car) {
+//         const index = this.cars.indexOf(car)
+//         this.cars.splice(index, 1)
+//     },
+//     updateCar(car){
+//         const index = this.cars.indexOf(car)
+//         update()
 
-    },
-    getInCar(car) {
-
-    }
+//     },
+    // getInCar(car) {
+    //     this.$router.push({path:`mods/${car.id}`})
+    // }
 }
 }
 </script>
 
 <style>
     .top-nav{
-        
         width: 100%
     }
 

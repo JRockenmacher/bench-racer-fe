@@ -7,6 +7,7 @@
             <h5 >{{mod.sub_category}}</h5>
             
             <p >Decription: {{mod.description}}</p>
+            <p>Cost: ${{mod.cost}}</p>
             <button type="button" @click="updateMod()" class="btn btn-warning">Update Mod</button>
             <button type="button" @click="removeMod()" class ="btn btn-danger">Remove Mod</button>
             <new-mod-form />

@@ -1,15 +1,35 @@
 <template>
-    <section class='container'>
+    <section class='container' 
+    v-if="mods.length">
+        <div class="mod-box"
+        v-for="mod in mods"
+        :key="mod.id"
+        >
+            <h3>Sub-Category: {{mod.sub_category}}</h3>
+            <p>Description: {{mod.description}}</p>
+            <h5>Cost: ${{mod.cost}}</h5>
+        </div>
         <new-mod-form />
     </section>
 </template>
 
 <script>
+
 import NewModForm from '@/components/NewModForm.vue'
 export default {
     name: 'mods',
+    props: [''],
     components: {
         NewModForm
+    },
+    mounted () {
+        const carID = this.$route.params.id
+        const apiURL = `http://localhost:3000/cars/mods/${carID}`
+        fetch(apiURL)
+        .then(res => res.json())
+        .then(res => {
+            this.mods = res.mods 
+        })
     },
     data () {
         return {
@@ -50,5 +70,10 @@ export default {
 </script>
 
 <style>
-
+    .mod-box {
+        background-color: rgba(255, 255, 255, 0.7);
+        color: black;
+        padding: 1em;
+        margin: .5em;
+    }
 </style>
