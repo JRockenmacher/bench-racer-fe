@@ -42,8 +42,8 @@ export default {
             })
           })
           .then(data => {
-            console.log(data);
-            this.getMod();
+            console.log(data)
+            this.getMod()
           })
           .then(console.log('deleted'))
         },

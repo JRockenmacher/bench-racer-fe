@@ -11,7 +11,6 @@
             <update-car-form 
             :car="car"
             :updateCar="updateCar"/>
-            <!-- <button type="button" @click="updateCar()" class="btn btn-warning">Update Car</button> -->
             <button type="button" @click="removeCar(car)" class ="btn btn-danger">Remove Car</button>
         </div>
     </section>

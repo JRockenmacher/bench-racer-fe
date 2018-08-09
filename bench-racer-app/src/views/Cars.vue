@@ -6,15 +6,14 @@
         <section class="container">
             <car-list 
             :cars="cars"
-            
+            :removeCar="removeCar"
+            :updateCar="updateCar"
             />
-            <!-- :removeCar="removeCar"
-            :getInCar="getInCar"
-            :updateCar="updateCar" -->
+            
             <mod-chart />
             <new-car-form 
+            :addCar='addCar'
             />
-            <!-- :addCar='addCar' -->
         </section>
     </section>
 </template>
@@ -24,7 +23,7 @@ import TopNav from '@/components/TopNav.vue'
 import CarList from '@/components/CarList.vue'
 import NewCarForm from '@/components/NewCarForm.vue'
 import ModChart from '@/components/ModChart.vue'
-// import API from '@/lib/API.js'
+// import API from '@/lib/API.js' - learn to do this later
 
 export default {
 name: 'cars',
@@ -39,17 +38,9 @@ components: {
             cars: []
         }
     },
-// async mounted() {
-//     this.movements = await API.getMovements()
-// },
+
     mounted() {
-        // const carAPI = 'http://localhost:3000/cars'
-        
-        this.getCars()
-        // this.getMods()
-                     
-     
-    
+        this.getCars()                     
     },
 methods: {
     getCars() {
@@ -58,26 +49,21 @@ methods: {
         .then(res => res.json())
         .then( (res) => {
             this.cars = res.cars
-            console.log("CARS IN APP", this.cars)                   
             })
     },
-        getMods() {
-        const modAPI = 'https://bench-racer.herokuapp.com/mods' 
-            fetch(modAPI)
-            .then(res => res.json())
-            .then( (res) => {
-                // console.log("FETCH FOR CARS", res);
-                this.mods = res.mods
-                console.log("MODS IN APP", this.mods);                      
-            })
-        },
+    getMods() {
+    const modAPI = 'https://bench-racer.herokuapp.com/mods' 
+        fetch(modAPI)
+        .then(res => res.json())
+        .then( (res) => {
+            this.mods = res.mods
+        })
+    },
     addCar(car) {
-        // console.log(this);
         const vue = this
         // why am i losing this in scope of fetch
         const data = JSON.stringify(car)
         const carAPI = 'https://bench-racer.herokuapp.com/cars'
-        // const carAPI = 'http://localhost:3000/cars'
             fetch(carAPI, {
             method: 'POST',
             headers: {
@@ -86,33 +72,46 @@ methods: {
             body: data
             })
             .then(function(response) {
-                return response.json();
+                return response.json()
             })
-            .then(function(newCar) {
-                console.log(this);
-                
-                vue.cars.push(newCar)
-                console.log('RESULT', newCar)
+            .then(function(newCar) {                
+                vue.cars.push(newCar.car)
             })
             .catch(function(error) {
-                console.log('error:', error.message);
-            });
+            })
       },
-    // addCar(car) {
-    //     this.cars.push(car)
-    // },
-//     removeCar(car) {
-//         const index = this.cars.indexOf(car)
-//         this.cars.splice(index, 1)
-//     },
-//     updateCar(car){
-//         const index = this.cars.indexOf(car)
-//         update()
-
-//     },
-    // getInCar(car) {
-    //     this.$router.push({path:`mods/${car.id}`})
-    // }
+    
+    removeCar(car) {
+        const id = car.id
+        const carAPI = `https://bench-racer.herokuapp.com/cars/${car.id}`
+         fetch(carAPI, {
+            method: 'DELETE',
+            headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            }          
+         })
+        .then(res => res.json())
+        .then(res => {
+            this.cars = this.cars.filter(car => {
+                return car.id != id
+            })
+        })
+    },
+    updateCar(car){
+        console.log("FROM updateCar", car)
+        const carAPI = `https://bench-racer.herokuapp.com/cars/${car.id}`
+         fetch(carAPI, {
+            method: 'PUT',
+            headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(car)
+            })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+            })
+    }
 }
 }
 </script>

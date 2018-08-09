@@ -16,7 +16,7 @@
                 <label for="color">Color</label>
                 <input v-model="carToUpdate.color" type="text" name="color" id="color" class="form-control">
                 <button type="submit" 
-                variant="success">Submit</button>
+                class="btn btn-success">Submit</button>
             </div>
         </b-form>
     </section>
@@ -25,7 +25,6 @@
 <script>
 export default {
     mounted () {
-        // console.log(this.car);
     },
     props: ['updateCar', 'car'],
     data: function() {
@@ -37,11 +36,8 @@ export default {
     methods: {
         onUpdateCar() {
             const id = this.car.id
-            console.log(id)
-            // this.UpdateCar(this.car)
-            // this.car = getEmptyUpdate()
-            // getEmptyUpdate()
-            // this.showForm = false
+            this.updateCar(this.car)
+            this.showForm = false
         }
     }
 }
